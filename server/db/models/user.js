@@ -14,6 +14,12 @@ const definitions = {
   },
   salt: {
     type: Sequelize.STRING
+  },
+ first_name: {
+      type: Sequelize.STRING
+  },
+  last_name: {
+      type: Sequelize.STRING
   }
 }
 
