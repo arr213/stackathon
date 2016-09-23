@@ -17,7 +17,7 @@ var ensureAuthenticated = function(req, res, next) {
     }
 };
 
-router.get('/', ensureAuthenticated, function(req, res, next) {
+router.get('/', ensureAuthenticated, function(req, res, next) {]
     Movie.findAll()
         .then(foundMovies => res.send(foundMovies))
         .catch(next);

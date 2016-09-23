@@ -17,14 +17,17 @@ name in the environment files.
 
 */
 
+require("babel-core/register");
 var chalk = require('chalk');
-var db = require('./server/db');
+var db = require('./server/db').default;
 var User = db.model('user');
 var Vote = db.model('vote');
 var Room = db.model('room');
 var Movie = db.model('movie');
 var Service = db.model('service');
 var Promise = require('sequelize').Promise;
+var movieList = require('./movie-database.js').movieList;
+
 
 var seedUsers = function () {
     var users = [
@@ -71,30 +74,32 @@ var seedRooms = function () {
 };
 
 var seedMovies = function () {
-    var movies = [
-        {
-            title: 'Forrest Gump',
-            gbid: 3 
-        },
-        {
-            title: 'Pretty Woman',
-            gbid: 4
-        },
-        {
-            title: 'The Shawshank Redemption',
-            gbid: 5
-        },
-        {
-            title: 'The Godfather',
-            gbid: 6
-        },
-        {
-            title: 'Pulp Fiction',
-            gbid: 7
-        }
-    ]
 
-    var creatingMovies = movies.map(function (movieObj) {
+
+    var editedMovies = movieList.map(function(movie){
+
+
+        var sources = movie.purchase_web_sources.map(function(webSource){
+                return webSource.source;
+        });
+
+        console.log(movie.genres);
+
+        return {
+
+            title: movie.title,
+            gbid: movie.id,
+            image: movie.poster_120x171,
+            genres: movie.genres.title,
+            sources: sources,
+            rating: movie.rating,
+            overview: movie.overview
+
+        }
+    })
+
+    var creatingMovies = editedMovies.map(function (movieObj) {
+
         return Movie.create(movieObj);
     });
     return Promise.all(creatingMovies);
