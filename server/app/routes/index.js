@@ -3,10 +3,10 @@ var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 
 router.use('/members', require('./members'));
-router.use('/members', require('./users'));
-router.use('/members', require('./rooms'));
-router.use('/members', require('./movies'));
-router.use('/members', require('./votes'));
+router.use('/users', require('./users'));
+router.use('/rooms', require('./rooms'));
+router.use('/movies', require('./movies'));
+router.use('/votes', require('./votes'));
 
 
 // Make sure this is after all of

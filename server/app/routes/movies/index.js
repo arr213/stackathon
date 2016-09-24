@@ -17,22 +17,23 @@ var ensureAuthenticated = function(req, res, next) {
     }
 };
 
-router.get('/', ensureAuthenticated, function(req, res, next) {]
+router.get('/', function(req, res, next) {
     Movie.findAll()
         .then(foundMovies => res.send(foundMovies))
         .catch(next);
 });
 
-router.get('/:id', ensureAuthenticated, function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     Movie.findById(req.params.id)
         .then(foundMovie => res.send(foundMovie))
         .catch(next);
 });
 
-router.get('/room/:roomId', ensureAuthenticated, function(req, res, next) {
+router.get('/room/:roomId', function(req, res, next) {
     Movie.findAll({
             include: [{
                 model: Vote,
+                required: true,
                 where: {
                     roomId: req.params.roomId
                 }

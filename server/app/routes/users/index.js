@@ -27,7 +27,7 @@ router.get('/room/:roomId', function(req,res,next){
 	User.findAll({
 		where: {roomId: state.params.roomId}
 	})
-	.then(users => res.send(users));
+	.then(users => res.send(users))
 	.catch(next);
 })
 

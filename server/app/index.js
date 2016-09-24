@@ -31,7 +31,7 @@ module.exports = function (db) {
 
   })
 
-  router.use('/api', require('./routes'));
+  app.use('/api', require('./routes'));
 
   app.get('*', (req, res) => {
     res.sendFile(app.get('indexHTMLPath'))
